@@ -42,8 +42,7 @@ class ContributorsExperience(ProcessMetric):
                     lines_authored
 
         for path, contributions in list(files.items()):
-            total = sum(contributions.values())
-            if total == 0:
+            if (total := sum(contributions.values())) == 0:
                 del files[path]
             else:
                 files[path] = round(100*max(contributions.values()) / total, 2)

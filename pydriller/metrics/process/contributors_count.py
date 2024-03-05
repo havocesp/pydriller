@@ -53,8 +53,7 @@ class ContributorsCount(ProcessMetric):
                 self.contributors[filepath][author] = self.contributors[filepath].get(author, 0) + lines_authored
 
         for path, contributions in list(self.contributors.items()):
-            total = sum(contributions.values())
-            if total == 0:
+            if (total := sum(contributions.values())) == 0:
                 del self.contributors[path]
             else:
                 contributors_count = len(contributions.values())

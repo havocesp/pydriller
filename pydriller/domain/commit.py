@@ -893,8 +893,7 @@ class Commit:
         :param dmm_prop: Property indicating the type of risk
         :return: dmm value (between 0.0 and 1.0) for the property represented in the property.
         """
-        delta_profile = self._delta_risk_profile(dmm_prop)
-        if delta_profile:
+        if delta_profile := self._delta_risk_profile(dmm_prop):
             (delta_low, delta_high) = delta_profile
             return self._good_change_proportion(delta_low, delta_high)
         return None
@@ -910,10 +909,9 @@ class Commit:
         :param dmm_prop: Property indicating the type of risk
         :return: total delta risk profile for this commit.
         """
-        supported_modifications = [
+        if supported_modifications := [
             mod for mod in self.modified_files if mod.language_supported
-        ]
-        if supported_modifications:
+        ]:
             deltas = [
                 mod._delta_risk_profile(dmm_prop)
                 for mod in supported_modifications
@@ -947,8 +945,7 @@ class Commit:
 
         assert good_change >= 0 and bad_change >= 0
 
-        total_change = good_change + bad_change
-        if total_change == 0:
+        if (total_change := good_change + bad_change) == 0:
             proportion = None
         else:
             proportion = good_change / total_change

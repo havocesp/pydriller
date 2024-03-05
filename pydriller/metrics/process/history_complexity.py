@@ -53,8 +53,7 @@ class HistoryComplexity(ProcessMetric):
                 if modified_file.change_type == ModificationType.RENAME:
                     renamed_files[modified_file.old_path] = filepath
 
-                modifications = modified_file.added_lines + modified_file.deleted_lines
-                if modifications:
+                if modifications := modified_file.added_lines + modified_file.deleted_lines:
                     files[filepath] = files.get(filepath, 0) + modifications
 
         # Total lines modified in the period
