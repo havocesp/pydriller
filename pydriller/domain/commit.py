@@ -462,8 +462,8 @@ class ModifiedFile:
         :param dmm_prop: Property indicating the type of risk
         :return: total risk profile for methods according to property.
         """
-        low = sum([m.nloc for m in methods if m.is_low_risk(dmm_prop)])
-        high = sum([m.nloc for m in methods if not m.is_low_risk(dmm_prop)])
+        low = sum(m.nloc for m in methods if m.is_low_risk(dmm_prop))
+        high = sum(m.nloc for m in methods if not m.is_low_risk(dmm_prop))
         return low, high
 
     def _delta_risk_profile(self, dmm_prop: DMMProperty) -> Tuple[int, int]:
