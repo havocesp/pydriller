@@ -42,7 +42,7 @@ class HunksCount(ProcessMetric):
                 hunks = 0
 
                 for line in diff.splitlines():
-                    if line.startswith('+') or line.startswith('-'):
+                    if line.startswith(('+', '-')):
                         if not is_hunk:
                             is_hunk = True
                             hunks += 1
